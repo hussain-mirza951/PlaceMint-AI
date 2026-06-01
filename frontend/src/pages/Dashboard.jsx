@@ -15,15 +15,19 @@ function Dashboard() {
   </div>
 </Link>
 
-        <div className="card">
-          <h3>Skill Tracker</h3>
-          <p>Track your progress and missing skills.</p>
-        </div>
+        <Link to="/skills">
+  <div className="card">
+    <h3>Skill Tracker</h3>
+    <p>Track your progress and missing skills.</p>
+  </div>
+</Link>
 
-        <div className="card">
-          <h3>Company Roadmap</h3>
-          <p>Prepare for target companies step by step.</p>
-        </div>
+        <Link to="/roadmap">
+  <div className="card">
+    <h3>Company Roadmap</h3>
+    <p>Prepare for target companies step by step.</p>
+  </div>
+</Link>
       </div>
     </div>
   );

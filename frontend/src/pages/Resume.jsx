@@ -46,22 +46,30 @@ const analyzeResume = () => {
 
       {showResult && (
         <div className="result-card">
-          <h2>Resume Score: {score}/100</h2>
+  <h2>Resume Score: {score}/100</h2>
 
-          <h3>Strengths</h3>
-          <ul>
-            <li>Good academic background</li>
-            <li>Technical skills listed</li>
-            <li>Projects included</li>
-          </ul>
+  <h3>Skills Found</h3>
+  <ul>
+    <li>Java</li>
+    <li>Python</li>
+    <li>Data Structures</li>
+    <li>SQL</li>
+  </ul>
 
-          <h3>Improvements</h3>
-          <ul>
-            <li>Add measurable achievements</li>
-            <li>Improve project descriptions</li>
-            <li>Add GitHub profile link</li>
-          </ul>
-        </div>
+  <h3>Missing Skills</h3>
+  <ul>
+    <li>System Design</li>
+    <li>Cloud Computing</li>
+    <li>Docker</li>
+  </ul>
+
+  <h3>Suggestions</h3>
+  <ul>
+    <li>Add GitHub project links</li>
+    <li>Quantify project achievements</li>
+    <li>Highlight internships and certifications</li>
+  </ul>
+</div>
       )}
     </div>
   );

@@ -4,6 +4,8 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Resume from "./pages/Resume";
+import SkillTracker from "./pages/SkillTracker";
+import CompanyRoadmap from "./pages/CompanyRoadmap";
 function App() {
   return (
     <BrowserRouter>
@@ -12,6 +14,8 @@ function App() {
   <Route path="/login" element={<Login />} />
   <Route path="/dashboard" element={<Dashboard />} />
   <Route path="/resume" element={<Resume />} />
+  <Route path="/skills" element={<SkillTracker />} />
+  <Route path="/roadmap" element={<CompanyRoadmap />} />
 </Routes>
     </BrowserRouter>
   );

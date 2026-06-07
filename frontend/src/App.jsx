@@ -6,6 +6,8 @@ import Dashboard from "./pages/Dashboard";
 import Resume from "./pages/Resume";
 import SkillTracker from "./pages/SkillTracker";
 import CompanyRoadmap from "./pages/CompanyRoadmap";
+import Readiness from "./pages/Readiness";
+import Profile from "./pages/Profile";
 function App() {
   return (
     <BrowserRouter>
@@ -16,6 +18,8 @@ function App() {
   <Route path="/resume" element={<Resume />} />
   <Route path="/skills" element={<SkillTracker />} />
   <Route path="/roadmap" element={<CompanyRoadmap />} />
+  <Route path="/readiness" element={<Readiness />} />
+  <Route path="/profile" element={<Profile />} />
 </Routes>
     </BrowserRouter>
   );

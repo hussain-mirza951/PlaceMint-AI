@@ -1,0 +1,11 @@
+Phase 1
+Frontend Complete
+
+Landing Page
+Login
+Dashboard
+Resume Upload
+Resume Analysis UI
+
+Phase 2
+Backend Integration

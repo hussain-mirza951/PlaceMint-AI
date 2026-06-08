@@ -1,20 +1,18 @@
 import "../App.css";
 
 function Readiness() {
-  const profile = {
-    name: "Ali",
-    cgpa: 8.42,
-    company: "Google",
-  };
+  const profile =
+    JSON.parse(localStorage.getItem("profile")) || {};
 
-  let resumeScore = 80;
-  let skillsScore = 75;
-  let projectsScore = 90;
-  let aptitudeScore = 60;
+  const resumeScore = 80;
+  const skillsScore = 75;
+  const projectsScore = 90;
+  const aptitudeScore =
+  Number(localStorage.getItem("aptitudeScore")) * 20 || 60;
 
   let bonus = 0;
 
-  if (profile.cgpa >= 8.5) {
+  if (Number(profile.cgpa) >= 8.5) {
     bonus += 5;
   }
 
@@ -35,18 +33,27 @@ function Readiness() {
       <h1>Placement Readiness</h1>
 
       <div className="roadmap-result">
-        <h2>{profile.name}</h2>
+        <h2>{profile.name || "Student"}</h2>
 
-        <p>Target Company: {profile.company}</p>
+        <p>
+          Target Company:{" "}
+          {profile.company || "Not Selected"}
+        </p>
 
-        <p>CGPA: {profile.cgpa}</p>
+        <p>
+          CGPA: {profile.cgpa || "Not Entered"}
+        </p>
 
-        <h2>Overall Readiness: {overallScore}%</h2>
+        <h2>
+          Overall Readiness: {overallScore}%
+        </h2>
 
         <div className="progress-bar">
           <div
             className="progress-fill"
-            style={{ width: `${overallScore}%` }}
+            style={{
+              width: `${overallScore}%`,
+            }}
           ></div>
         </div>
 
@@ -58,7 +65,7 @@ function Readiness() {
           <>
             <p>✓ Learn System Design</p>
             <p>✓ Practice Competitive Programming</p>
-            <p>✓ Solve LeetCode Medium Questions</p>
+            <p>✓ Solve LeetCode Daily</p>
           </>
         )}
 
@@ -74,7 +81,7 @@ function Readiness() {
           <>
             <p>✓ Strengthen OOP Concepts</p>
             <p>✓ Build Full Stack Projects</p>
-            <p>✓ Practice Behavioral Questions</p>
+            <p>✓ Practice Behavioral Interviews</p>
           </>
         )}
       </div>

@@ -225,3 +225,119 @@ select {
   border: none;
   font-size: 16px;
 }
+button {
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.eligibility-layout {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}
+
+.eligibility-panel,
+.eligibility-result {
+  width: 420px;
+  background: #1e293b;
+  padding: 25px;
+  border-radius: 12px;
+  text-align: left;
+}
+
+.eligibility-panel p,
+.eligibility-result p {
+  color: #cbd5e1;
+  margin: 10px 0;
+}
+
+.eligibility-panel input,
+.eligibility-panel select {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.eligibility-result {
+  margin: 35px auto;
+  border-left: 5px solid #f59e0b;
+}
+
+.eligibility-result.eligible {
+  border-left-color: #22c55e;
+}
+
+.eligibility-result.not-eligible {
+  border-left-color: #f97316;
+}
+
+.eligibility-checks {
+  margin-top: 20px;
+}
+
+.resume-analyzer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-top: 35px;
+}
+
+.resume-upload-panel {
+  width: 380px;
+  background: #1e293b;
+  padding: 25px;
+  border-radius: 12px;
+  text-align: left;
+}
+
+.resume-upload-panel label {
+  display: block;
+  margin: 14px 0 6px;
+  font-weight: bold;
+}
+
+.resume-upload-panel input,
+.resume-upload-panel select {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.resume-upload-panel p,
+.result-card p,
+.result-card li {
+  color: #cbd5e1;
+}
+
+.error-text {
+  color: #fca5a5;
+  margin-top: 12px;
+}
+
+.skill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 10px 0 20px;
+}
+
+.skill-list span {
+  background: #334155;
+  color: white;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.resume-preview {
+  background: #0f172a;
+  padding: 15px;
+  border-radius: 8px;
+  line-height: 1.5;
+}

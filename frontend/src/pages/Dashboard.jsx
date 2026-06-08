@@ -41,6 +41,20 @@ function Dashboard() {
             <p>View your readiness score.</p>
           </div>
         </Link>
+
+        <Link to="/aptitude">
+          <div className="card">
+            <h3>Aptitude Practice</h3>
+            <p>Practice placement aptitude tests.</p>
+          </div>
+        </Link>
+
+        <Link to="/eligibility">
+          <div className="card">
+            <h3>Eligibility Checker</h3>
+            <p>Check company criteria and profile gaps.</p>
+          </div>
+        </Link>
       </div>
     </div>
   );

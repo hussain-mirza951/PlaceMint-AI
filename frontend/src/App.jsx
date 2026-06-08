@@ -8,19 +8,24 @@ import SkillTracker from "./pages/SkillTracker";
 import CompanyRoadmap from "./pages/CompanyRoadmap";
 import Readiness from "./pages/Readiness";
 import Profile from "./pages/Profile";
+import Aptitude from "./pages/Aptitude";
+import Eligibility from "./pages/Eligibility";
+
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-  <Route path="/" element={<Home />} />
-  <Route path="/login" element={<Login />} />
-  <Route path="/dashboard" element={<Dashboard />} />
-  <Route path="/resume" element={<Resume />} />
-  <Route path="/skills" element={<SkillTracker />} />
-  <Route path="/roadmap" element={<CompanyRoadmap />} />
-  <Route path="/readiness" element={<Readiness />} />
-  <Route path="/profile" element={<Profile />} />
-</Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/resume" element={<Resume />} />
+        <Route path="/skills" element={<SkillTracker />} />
+        <Route path="/roadmap" element={<CompanyRoadmap />} />
+        <Route path="/readiness" element={<Readiness />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/aptitude" element={<Aptitude />} />
+        <Route path="/eligibility" element={<Eligibility />} />
+      </Routes>
     </BrowserRouter>
   );
 }

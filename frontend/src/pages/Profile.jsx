@@ -1,14 +1,27 @@
 import "../App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function Profile() {
-  const [profile, setProfile] = useState({
-    name: "",
-    branch: "",
-    cgpa: "",
-    company: "",
-    year: "",
+  const [profile, setProfile] = useState(() => {
+    const savedProfile = localStorage.getItem("profile");
+
+    return savedProfile
+      ? JSON.parse(savedProfile)
+      : {
+          name: "",
+          branch: "",
+          cgpa: "",
+          company: "",
+          year: "",
+        };
   });
+
+  useEffect(() => {
+    localStorage.setItem(
+      "profile",
+      JSON.stringify(profile)
+    );
+  }, [profile]);
 
   const handleChange = (e) => {
     setProfile({
@@ -26,6 +39,7 @@ function Profile() {
           type="text"
           name="name"
           placeholder="Full Name"
+          value={profile.name}
           onChange={handleChange}
         />
 
@@ -35,6 +49,7 @@ function Profile() {
           type="text"
           name="branch"
           placeholder="Branch"
+          value={profile.branch}
           onChange={handleChange}
         />
 
@@ -44,6 +59,7 @@ function Profile() {
           type="text"
           name="cgpa"
           placeholder="CGPA"
+          value={profile.cgpa}
           onChange={handleChange}
         />
 
@@ -51,6 +67,7 @@ function Profile() {
 
         <select
           name="company"
+          value={profile.company}
           onChange={handleChange}
         >
           <option value="">Select Company</option>
@@ -65,6 +82,7 @@ function Profile() {
           type="text"
           name="year"
           placeholder="Graduation Year"
+          value={profile.year}
           onChange={handleChange}
         />
       </div>

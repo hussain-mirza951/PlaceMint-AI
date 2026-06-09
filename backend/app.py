@@ -4,6 +4,11 @@ from io import BytesIO
 from flask import Flask, jsonify, request
 from pypdf import PdfReader
 
+try:
+    from eligibility import check_eligibility, validate_eligibility_payload
+except ModuleNotFoundError:
+    from backend.eligibility import check_eligibility, validate_eligibility_payload
+
 
 app = Flask(__name__)
 app.config["MAX_CONTENT_LENGTH"] = 5 * 1024 * 1024
@@ -109,6 +114,17 @@ def analyze_resume():
     result = build_resume_analysis(text, target_role, target_skills)
 
     return jsonify(result)
+
+
+@app.post("/api/eligibility/check")
+def check_student_eligibility():
+    payload = request.get_json(silent=True) or {}
+    student, errors = validate_eligibility_payload(payload)
+
+    if errors:
+        return jsonify({"errors": errors}), 400
+
+    return jsonify(check_eligibility(student))
 
 
 def extract_pdf_text(file_bytes):

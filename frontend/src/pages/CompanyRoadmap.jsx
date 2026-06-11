@@ -2,68 +2,163 @@ import "../App.css";
 import { useState } from "react";
 
 function CompanyRoadmap() {
-  const [company, setCompany] = useState("");
+  const profile =
+    JSON.parse(localStorage.getItem("profile")) || {};
+
+  const [company, setCompany] = useState(
+    profile.company || ""
+  );
+
+  const roadmaps = {
+    Amazon: {
+      readiness: 80,
+      steps: [
+        "Master Data Structures & Algorithms",
+        "Learn Low Level Design",
+        "Build Backend Projects",
+        "Practice Online Assessments",
+        "Prepare Leadership Principles",
+      ],
+    },
+
+    Google: {
+      readiness: 75,
+      steps: [
+        "Advanced DSA",
+        "Competitive Programming",
+        "System Design",
+        "Open Source Contributions",
+        "Mock Interviews",
+      ],
+    },
+
+    Microsoft: {
+      readiness: 78,
+      steps: [
+        "Data Structures",
+        "OOP Concepts",
+        "Operating Systems",
+        "Full Stack Projects",
+        "Behavioral Interviews",
+      ],
+    },
+
+    Infosys: {
+      readiness: 90,
+      steps: [
+        "Aptitude Preparation",
+        "Communication Skills",
+        "OOP Basics",
+        "DBMS Concepts",
+        "Mock HR Interviews",
+      ],
+    },
+
+    TCS: {
+      readiness: 92,
+      steps: [
+        "Aptitude Practice",
+        "Coding Basics",
+        "DBMS",
+        "Operating Systems",
+        "Interview Preparation",
+      ],
+    },
+  };
 
   return (
     <div className="dashboard">
       <h1>Company Roadmap</h1>
 
+      <p>
+        Select your dream company and follow
+        the recommended roadmap.
+      </p>
+
       <div className="features">
-        <div
-          className="card"
-          onClick={() => setCompany("Amazon")}
-        >
-          <h3>Amazon</h3>
-          <p>DSA • LLD • Projects</p>
-        </div>
+        {Object.keys(roadmaps).map(
+          (companyName) => (
+            <div
+              key={companyName}
+              className="card"
+              onClick={() =>
+                setCompany(companyName)
+              }
+            >
+              <h3>{companyName}</h3>
 
-        <div
-          className="card"
-          onClick={() => setCompany("Google")}
-        >
-          <h3>Google</h3>
-          <p>DSA • System Design • CP</p>
-        </div>
-
-        <div
-          className="card"
-          onClick={() => setCompany("Microsoft")}
-        >
-          <h3>Microsoft</h3>
-          <p>DSA • OOP • Projects</p>
-        </div>
+              <p>
+                Readiness:{" "}
+                {
+                  roadmaps[companyName]
+                    .readiness
+                }
+                %
+              </p>
+            </div>
+          )
+        )}
       </div>
 
-      {company === "Amazon" && (
+      {company && (
         <div className="roadmap-result">
-          <h2>Amazon Roadmap</h2>
+          <h2>{company} Roadmap</h2>
 
-          <p>1. Master DSA</p>
-          <p>2. Learn LLD</p>
-          <p>3. Build Backend Projects</p>
-          <p>4. Practice OA Questions</p>
-        </div>
-      )}
+          <div className="progress-bar">
+            <div
+              className="progress-fill"
+              style={{
+                width: `${roadmaps[company].readiness}%`,
+              }}
+            ></div>
+          </div>
 
-      {company === "Google" && (
-        <div className="roadmap-result">
-          <h2>Google Roadmap</h2>
+          <p>
+            Current Readiness:
+            {" "}
+            {
+              roadmaps[company]
+                .readiness
+            }
+            %
+          </p>
 
-          <p>1. Advanced DSA</p>
-          <p>2. Competitive Programming</p>
-          <p>3. System Design</p>
-          <p>4. Mock Interviews</p>
-        </div>
-      )}
+          <br />
 
-      {company === "Microsoft" && (
-        <div className="roadmap-result">
-          <h2>Microsoft Roadmap</h2>
+          <h3>Preparation Plan</h3>
 
-          <p>1. DSA</p>
-          <p>2. OOP Concepts</p>
-          <p>3. Full Stack Projects</p>
-          <p>4. Behavioral Interviews</p>
+          {roadmaps[company].steps.map(
+            (step, index) => (
+              <p key={step}>
+                ✅ {index + 1}. {step}
+              </p>
+            )
+          )}
+
+          <br />
+
+          <h3>
+            Personalized Suggestion
+          </h3>
+
+          <p>
+            Target Company:
+            {" "}
+            {profile.company ||
+              "Not Selected"}
+          </p>
+
+          <p>
+            Current CGPA:
+            {" "}
+            {profile.cgpa ||
+              "Not Available"}
+          </p>
+
+          <p>
+            Focus on completing all roadmap
+            steps before placement season.
+          </p>
         </div>
       )}
     </div>

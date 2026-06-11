@@ -217,30 +217,108 @@ function Field({ label, error, children }) {
 function EligibilityResults({ result }) {
   return (
     <section className="eligibility-results">
+
       <div className="eligibility-summary">
         <div>
           <span>Overall Eligibility</span>
-          <strong>{result.eligibilityPercentage}%</strong>
+          <strong>
+            {result.eligibilityPercentage}%
+          </strong>
         </div>
+
         <div>
           <span>Eligible Companies</span>
-          <strong>{result.eligibleCompanies.length}</strong>
+          <strong>
+            {result.eligibleCompanies.length}
+          </strong>
         </div>
+
         <div>
           <span>Needs Work</span>
-          <strong>{result.notEligibleCompanies.length}</strong>
+          <strong>
+            {result.notEligibleCompanies.length}
+          </strong>
         </div>
       </div>
 
+      {result.bestMatch && (
+        <div className="roadmap-result">
+          <h2>🏆 Best Match Company</h2>
+
+          <h1>
+            {result.bestMatch.company}
+          </h1>
+
+          <h3>
+            Match Score:
+            {" "}
+            {result.bestMatch.eligibilityPercentage}%
+          </h3>
+
+          <div className="progress-bar">
+            <div
+              className="progress-fill"
+              style={{
+                width: `${result.bestMatch.eligibilityPercentage}%`,
+              }}
+            ></div>
+          </div>
+        </div>
+      )}
+
+      {result.topMatches &&
+        result.topMatches.length > 0 && (
+          <div className="roadmap-result">
+            <h2>🥇 Top Company Matches</h2>
+
+            {result.topMatches.map(
+              (company, index) => (
+                <div
+                  key={company.company}
+                  style={{
+                    marginBottom: "20px",
+                  }}
+                >
+                  <p>
+                    <strong>
+                      #{index + 1}
+                    </strong>
+                    {" "}
+                    {company.company}
+                  </p>
+
+                  <div className="progress-bar">
+                    <div
+                      className="progress-fill"
+                      style={{
+                        width: `${company.eligibilityPercentage}%`,
+                      }}
+                    ></div>
+                  </div>
+
+                  <p>
+                    {company.eligibilityPercentage}%
+                    Match
+                  </p>
+                </div>
+              )
+            )}
+          </div>
+        )}
+
       <CompanyGroup
         title="Eligible Companies"
-        companies={result.eligibleCompanies}
+        companies={
+          result.eligibleCompanies
+        }
         emptyText="No companies are fully eligible yet."
       />
 
       <CompanyGroup
         title="Not Eligible Companies"
-        companies={result.notEligibleCompanies}
+        companies={
+          result.notEligibleCompanies
+        }
         emptyText="Great work. No rejection gaps found."
       />
     </section>

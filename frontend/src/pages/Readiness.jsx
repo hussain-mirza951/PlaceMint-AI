@@ -4,33 +4,74 @@ function Readiness() {
   const profile =
     JSON.parse(localStorage.getItem("profile")) || {};
 
-  const resumeScore = 80;
-  const skillsScore = 75;
-  const projectsScore = 90;
   const aptitudeScore =
-  Number(localStorage.getItem("aptitudeScore")) * 20 || 60;
+    Number(localStorage.getItem("aptitudeScore")) * 20 || 60;
 
-  let bonus = 0;
+  const resumeScore =
+    Number(localStorage.getItem("resumeScore")) || 80;
 
-  if (Number(profile.cgpa) >= 8.5) {
-    bonus += 5;
-  }
+  const cgpaScore =
+    Math.min(100, (Number(profile.cgpa) || 0) * 10);
 
-  const overallScore = Math.min(
-    100,
-    Math.round(
-      (
-        resumeScore +
-        skillsScore +
-        projectsScore +
-        aptitudeScore
-      ) / 4 + bonus
-    )
+  const profileCompletion =
+    [
+      profile.name,
+      profile.branch,
+      profile.cgpa,
+      profile.company,
+      profile.year,
+    ].filter(Boolean).length * 20;
+
+  const overallScore = Math.round(
+    (
+      aptitudeScore +
+      resumeScore +
+      cgpaScore +
+      profileCompletion
+    ) / 4
   );
+
+  const strengths = [];
+  const weaknesses = [];
+
+  if (cgpaScore >= 80) strengths.push("Strong Academic Record");
+  else weaknesses.push("Improve Academic Performance");
+
+  if (aptitudeScore >= 80) strengths.push("Strong Aptitude Skills");
+  else weaknesses.push("Practice Aptitude Tests");
+
+  if (resumeScore >= 80) strengths.push("Good Resume Quality");
+  else weaknesses.push("Improve Resume ATS Score");
+
+  if (profileCompletion >= 80)
+    strengths.push("Complete Professional Profile");
+  else weaknesses.push("Complete Your Profile");
 
   return (
     <div className="dashboard">
       <h1>Placement Readiness</h1>
+
+      <div className="stats-grid">
+        <div className="stat-card">
+          <h3>Overall Readiness</h3>
+          <h2>{overallScore}%</h2>
+        </div>
+
+        <div className="stat-card">
+          <h3>CGPA Score</h3>
+          <h2>{cgpaScore}%</h2>
+        </div>
+
+        <div className="stat-card">
+          <h3>Resume Score</h3>
+          <h2>{resumeScore}%</h2>
+        </div>
+
+        <div className="stat-card">
+          <h3>Aptitude Score</h3>
+          <h2>{aptitudeScore}%</h2>
+        </div>
+      </div>
 
       <div className="roadmap-result">
         <h2>{profile.name || "Student"}</h2>
@@ -44,10 +85,6 @@ function Readiness() {
           CGPA: {profile.cgpa || "Not Entered"}
         </p>
 
-        <h2>
-          Overall Readiness: {overallScore}%
-        </h2>
-
         <div className="progress-bar">
           <div
             className="progress-fill"
@@ -59,7 +96,19 @@ function Readiness() {
 
         <br />
 
-        <h3>Recommendations</h3>
+        <h3>Strengths</h3>
+
+        {strengths.map((item) => (
+          <p key={item}>✅ {item}</p>
+        ))}
+
+        <h3>Areas to Improve</h3>
+
+        {weaknesses.map((item) => (
+          <p key={item}>⚠️ {item}</p>
+        ))}
+
+        <h3>Company Recommendations</h3>
 
         {profile.company === "Google" && (
           <>

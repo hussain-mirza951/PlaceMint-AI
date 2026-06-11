@@ -1,3 +1,4 @@
+import Sidebar from "./components/Sidebar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
@@ -14,18 +15,24 @@ import Eligibility from "./pages/Eligibility";
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/resume" element={<Resume />} />
-        <Route path="/skills" element={<SkillTracker />} />
-        <Route path="/roadmap" element={<CompanyRoadmap />} />
-        <Route path="/readiness" element={<Readiness />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/aptitude" element={<Aptitude />} />
-        <Route path="/eligibility" element={<Eligibility />} />
-      </Routes>
+      <div className="app-layout">
+        <Sidebar />
+
+        <div className="main-content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/resume" element={<Resume />} />
+            <Route path="/skills" element={<SkillTracker />} />
+            <Route path="/roadmap" element={<CompanyRoadmap />} />
+            <Route path="/readiness" element={<Readiness />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/aptitude" element={<Aptitude />} />
+            <Route path="/eligibility" element={<Eligibility />} />
+          </Routes>
+        </div>
+      </div>
     </BrowserRouter>
   );
 }

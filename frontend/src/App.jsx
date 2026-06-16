@@ -11,6 +11,9 @@ import Readiness from "./pages/Readiness";
 import Profile from "./pages/Profile";
 import Aptitude from "./pages/Aptitude";
 import Eligibility from "./pages/Eligibility";
+import InterviewPrep from "./pages/InterviewPrep";
+import PlacementPredictor from "./pages/PlacementPredictor";
+import CareerRecommender from "./pages/CareerRecommender";
 
 function Layout() {
   const location = useLocation();
@@ -40,6 +43,15 @@ function Layout() {
           <Route path="/readiness" element={<Readiness />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/aptitude" element={<Aptitude />} />
+          <Route path="/interview" element={<InterviewPrep />} />
+          <Route
+  path="/predictor"
+  element={<PlacementPredictor />}
+/>
+<Route
+  path="/career"
+  element={<CareerRecommender />}
+/>
           <Route path="/eligibility" element={<Eligibility />} />
         </Routes>
       </div>

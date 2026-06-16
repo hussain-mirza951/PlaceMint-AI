@@ -1,6 +1,20 @@
 import "../App.css";
 import { Link } from "react-router-dom";
 
+import {
+  GraduationCap,
+  FileText,
+  Brain,
+  Target,
+  Building2,
+  Trophy,
+} from "lucide-react";
+
+import StatCard from "../components/StatCard";
+import AnalyticsPanel from "../components/AnalyticsPanel";
+import AIPrediction from "../components/AIPrediction";
+import QuickStats from "../components/QuickStats";
+
 function Dashboard() {
   const profile =
     JSON.parse(localStorage.getItem("profile")) || {};
@@ -18,218 +32,114 @@ function Dashboard() {
     (aptitudeScore + resumeScore + skillsScore) / 3
   );
 
-  const cgpa = profile.cgpa || "Not Set";
+  const cgpa    = profile.cgpa    || "Not Set";
   const company = profile.company || "Not Selected";
-  const name = profile.name || "Student";
-
-  const placementPrediction =
-    readinessScore >= 80
-      ? "Excellent"
-      : readinessScore >= 60
-      ? "Good"
-      : "Needs Improvement";
+  const name    = profile.name    || "Student";
 
   return (
     <div className="dashboard">
-      <div className="dashboard-header">
-        <h1>Welcome, {name}</h1>
-        <p>
-          Your AI-powered placement preparation hub
-        </p>
+
+      {/* Premium Header — single class, no conflict */}
+      <div className="premium-header">
+        <div>
+          <span className="dashboard-badge">
+            AI Placement Intelligence Active
+          </span>
+
+          <h1 className="gradient-heading">
+            Welcome Back, {name}
+          </h1>
+
+          <p className="dashboard-subtitle">
+            Your journey toward{" "}
+            <strong>{company}</strong> is{" "}
+            <strong>{readinessScore}%</strong> complete.
+            Continue improving your resume, aptitude, and
+            technical skills to maximize placement success.
+          </p>
+        </div>
+
+        <div className="header-actions">
+          <Link to="/profile">
+            <button className="secondary-btn">Edit Profile</button>
+          </Link>
+          <Link to="/roadmap">
+            <button className="primary-btn">Generate Roadmap</button>
+          </Link>
+        </div>
       </div>
 
+      {/* 6-card Stats Grid */}
       <div className="stats-grid">
-        <div className="stat-card">
-          <h3>🎓 CGPA</h3>
-          <h2>{cgpa}</h2>
-        </div>
-
-        <div className="stat-card">
-          <h3>🏢 Target Company</h3>
-          <h2>{company}</h2>
-        </div>
-
-        <div className="stat-card">
-          <h3>🚀 Readiness</h3>
-          <h2>{readinessScore}%</h2>
-        </div>
-
-        <div className="stat-card">
-          <h3>📄 Resume</h3>
-          <h2>{resumeScore}%</h2>
-        </div>
-
-        <div className="stat-card">
-          <h3>🧠 Skills</h3>
-          <h2>{skillsScore}%</h2>
-        </div>
-
-        <div className="stat-card">
-          <h3>📝 Aptitude</h3>
-          <h2>{aptitudeScore}%</h2>
-        </div>
+        <StatCard title="CGPA"      value={cgpa}               icon={<GraduationCap />} />
+        <StatCard title="Resume"    value={`${resumeScore}%`}  icon={<FileText />} />
+        <StatCard title="Skills"    value={`${skillsScore}%`}  icon={<Brain />} />
+        <StatCard title="Aptitude"  value={`${aptitudeScore}%`} icon={<Target />} />
+        <StatCard title="Readiness" value={`${readinessScore}%`} icon={<Trophy />} />
+        <StatCard title="Target"    value={company}            icon={<Building2 />} />
       </div>
 
-      <div className="dashboard-panels">
-        <div className="panel">
-          <h2>📊 Performance Analytics</h2>
-
-          <p>Resume Score</p>
-          <div className="progress-bar">
-            <div
-              className="progress-fill"
-              style={{
-                width: `${resumeScore}%`,
-              }}
-            ></div>
-          </div>
-
-          <br />
-
-          <p>Skill Score</p>
-          <div className="progress-bar">
-            <div
-              className="progress-fill"
-              style={{
-                width: `${skillsScore}%`,
-              }}
-            ></div>
-          </div>
-
-          <br />
-
-          <p>Aptitude Score</p>
-          <div className="progress-bar">
-            <div
-              className="progress-fill"
-              style={{
-                width: `${aptitudeScore}%`,
-              }}
-            ></div>
-          </div>
-        </div>
-
-        <div className="panel">
-          <h2>🎯 Placement Prediction</h2>
-
-          <h3>{placementPrediction}</h3>
-
-          <p>
-            Current Readiness:
-            {" "}
-            {readinessScore}%
-          </p>
-
-          <p>
-            Dream Company:
-            {" "}
-            {company}
-          </p>
-
-          <p>
-            Continue improving your Resume,
-            Skills and Aptitude scores to
-            maximize placement chances.
-          </p>
-        </div>
+      {/* Analytics + AI Prediction side-by-side */}
+      <div className="dashboard-v2-grid">
+        <AnalyticsPanel />
+        <AIPrediction />
       </div>
 
-      <div className="panel">
-        <h2>🏆 Dream Company Match</h2>
+      {/* Quick Stats row — 4 metric tiles */}
+      <QuickStats />
 
-        <div className="stats-grid">
-          <div className="stat-card">
-            <h3>Google</h3>
-            <h2>
-              {Math.max(
-                0,
-                readinessScore - 10
-              )}
-              %
-            </h2>
+      {/* Dream Company Match */}
+      <div className="panel" style={{ padding: "28px", marginBottom: "32px" }}>
+        <h2 style={{ marginTop: 0, color: "#60a5fa" }}>Dream Company Match</h2>
+
+        <div className="company-match-grid">
+          <div className="company-chip">
+            Google
+            <span>{Math.max(0, readinessScore - 10)}%</span>
           </div>
-
-          <div className="stat-card">
-            <h3>Amazon</h3>
-            <h2>{readinessScore}%</h2>
+          <div className="company-chip">
+            Amazon
+            <span>{readinessScore}%</span>
           </div>
-
-          <div className="stat-card">
-            <h3>Microsoft</h3>
-            <h2>
-              {Math.max(
-                0,
-                readinessScore - 5
-              )}
-              %
-            </h2>
+          <div className="company-chip">
+            Microsoft
+            <span>{Math.max(0, readinessScore - 5)}%</span>
           </div>
-
-          <div className="stat-card">
-            <h3>Infosys</h3>
-            <h2>
-              {Math.min(
-                100,
-                readinessScore + 10
-              )}
-              %
-            </h2>
+          <div className="company-chip">
+            Infosys
+            <span>{Math.min(100, readinessScore + 10)}%</span>
           </div>
-
-          <div className="stat-card">
-            <h3>TCS</h3>
-            <h2>
-              {Math.min(
-                100,
-                readinessScore + 15
-              )}
-              %
-            </h2>
+          <div className="company-chip">
+            TCS
+            <span>{Math.min(100, readinessScore + 15)}%</span>
           </div>
         </div>
       </div>
 
-      <h2 className="section-title">
-        Quick Actions
-      </h2>
+      {/* Quick Actions */}
+      <h2 className="section-title">Quick Actions</h2>
 
-      <div className="features">
+      <div className="quick-actions-grid">
         <Link to="/profile">
-          <div className="card">
-            <h3>👤 Profile</h3>
-          </div>
+          <div className="action-card">👤 Profile</div>
         </Link>
-
         <Link to="/resume">
-          <div className="card">
-            <h3>📄 Resume Analyzer</h3>
-          </div>
+          <div className="action-card">📄 Resume Analyzer</div>
         </Link>
-
         <Link to="/skills">
-          <div className="card">
-            <h3>🧠 Skill Tracker</h3>
-          </div>
+          <div className="action-card">🧠 Skill Tracker</div>
         </Link>
-
         <Link to="/roadmap">
-          <div className="card">
-            <h3>🛣 Roadmap</h3>
-          </div>
+          <div className="action-card">🛣 Roadmaps</div>
         </Link>
-
-        <Link to="/readiness">
-          <div className="card">
-            <h3>📈 Readiness</h3>
-          </div>
-        </Link>
-
         <Link to="/eligibility">
-          <div className="card">
-            <h3>🎯 Eligibility</h3>
-          </div>
+          <div className="action-card">🎯 Eligibility</div>
+        </Link>
+        <Link to="/readiness">
+          <div className="action-card">📈 Readiness</div>
         </Link>
       </div>
+
     </div>
   );
 }
